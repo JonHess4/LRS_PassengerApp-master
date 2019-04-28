@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">LRS_PassengerApp</string>
+    <string name="client">Client: </string>
+    <string name="pickup">Pick up: </string>
+    <string name="dropoff">Drop Off: </string>
+    <string name="pickupTime">Time: </string>
+    <string name="returnTrip">Return Trip: </string>
+    <string name="waitTime">Wait Time: </string>
+    <string name="isAccepted">Is Accepted: </string>
+    <string name="rideID">Ride ID: </string>
+    <string name="title_activity_maps">Map</string>
+    <string name="server_addr">https://apps.ericvillnow.com/rideshare</string>
+    <dimen name="recycler_section_header_height">36dp</dimen>
+</resources>

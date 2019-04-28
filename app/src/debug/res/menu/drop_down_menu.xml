@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/MENU"
+        android:title="MENU"
+        app:showAsAction="always" >
+
+        <menu>
+
+            <item android:id="@+id/clientRides"
+                android:title="My Rides"/>
+            <item android:id="@+id/newRideRequest"
+                android:title="New Ride Request"/>
+
+        </menu>
+
+    </item>
+
+</menu>
