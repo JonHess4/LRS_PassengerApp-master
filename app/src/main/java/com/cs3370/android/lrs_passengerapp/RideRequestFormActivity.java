@@ -16,6 +16,9 @@ public class RideRequestFormActivity extends AppCompatActivity {
     private String mClient;
     private EditText mPickUp;
     private EditText mDropOff;
+    private EditText mEstimatedLength;
+    private EditText mPickUpTime;
+    private EditText mPickUpDate;
     private Button mNext;
 
     @Override
@@ -26,6 +29,9 @@ public class RideRequestFormActivity extends AppCompatActivity {
         mClient = Client.getInstance().get("name");
         mPickUp = (EditText) findViewById(R.id.pickUpLocation);
         mDropOff = (EditText) findViewById(R.id.dropOffLocation);
+        mEstimatedLength = (EditText) findViewById(R.id.estimatedLength);
+        mPickUpTime = (EditText) findViewById(R.id.pickUpTime);
+        mPickUpDate = (EditText) findViewById(R.id.pickUpDate);
         mNext = (Button) findViewById(R.id.submitRequest);
 
         mNext.setOnClickListener(new View.OnClickListener() {
@@ -34,6 +40,9 @@ public class RideRequestFormActivity extends AppCompatActivity {
                 Intent intent = new Intent(RideRequestFormActivity.this, MapsActivity.class);
                 intent.putExtra("pickUp", mPickUp.getText().toString());
                 intent.putExtra("dropOff", mDropOff.getText().toString());
+                intent.putExtra("estimatedLength", mEstimatedLength.getText().toString());
+                intent.putExtra("pickUpTime", mPickUpTime.getText().toString());
+                intent.putExtra("pickUpDate", mPickUpDate.getText().toString());
                 startActivity(intent);
             }
         });

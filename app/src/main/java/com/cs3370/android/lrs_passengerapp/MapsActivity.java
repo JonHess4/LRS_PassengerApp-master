@@ -2,7 +2,6 @@ package com.cs3370.android.lrs_passengerapp;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
@@ -64,7 +63,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String mPickUp;
     private String mDropOff;
 
-    private Button mAcceptRide;
+    private Button mSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,17 +93,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         };
         mClient = LocationServices.getFusedLocationProviderClient(this);
 
-        mAcceptRide = (Button) findViewById(R.id.button);
+        mSubmit = (Button) findViewById(R.id.button);
 
-        mAcceptRide.setOnClickListener(new View.OnClickListener() {
+        mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                acceptRide();
+                submitRide();
             }
         });
     }
 
-    private void acceptRide() {
+    private void submitRide() {
+        String url = getResources().getString(R.string.server_addr) + "/api/create-request?client_id=" + Client.getInstance().get("id") +
+                "&destination_address=" + getIntent().getSerializableExtra("dropOff").toString() + "&pick_up_address=" +
+                getIntent().getSerializableExtra("pickUp").toString() + "&estimated_length=" +
+                getIntent().getSerializableExtra("estimatedLength").toString() + "&time=" +
+                getIntent().getSerializableExtra("pickUpTime").toString() + "&date=" +
+                getIntent().getSerializableExtra("pickUpDate").toString() ;
         //ToDo move selected ride around in the lists of rides (will not be taken care of until we have access to the database
     }
 
