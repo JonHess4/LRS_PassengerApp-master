@@ -2,6 +2,7 @@ package com.cs3370.android.lrs_passengerapp;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
@@ -101,6 +102,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 submitRide();
             }
         });
+
+        if (!(getIntent().hasExtra("estimatedLength"))) {
+            mSubmit.setVisibility(View.GONE);
+            mSubmit.setEnabled(false);
+        }
     }
 
     private void submitRide() {
@@ -110,7 +116,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getIntent().getSerializableExtra("estimatedLength").toString() + "&time=" +
                 getIntent().getSerializableExtra("pickUpTime").toString() + "&date=" +
                 getIntent().getSerializableExtra("pickUpDate").toString() ;
-        //ToDo move selected ride around in the lists of rides (will not be taken care of until we have access to the database
+        //ToDO send info to server
+
+        Toast.makeText(getApplicationContext(), "Request Submitted", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MapsActivity.this, RecyclerViewActivity.class);
+        startActivity(intent);
     }
 
     private void updateMap(Location location) {
