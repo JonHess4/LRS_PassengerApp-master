@@ -4,7 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context=".RecyclerViewActivity">
+
+    <TextView
+        android:id="@+id/list_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="List Title"
+        android:gravity="center"
+        android:textSize="24dp"
+        android:padding="10dp"
+        android:background="#12aed2"
+        android:textColor="@android:color/white"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"

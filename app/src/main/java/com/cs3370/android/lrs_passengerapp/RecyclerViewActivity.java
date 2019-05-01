@@ -6,10 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -19,6 +19,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private MyAdapter mAdapter;
+
+    private TextView mListTitle;
 
     private List<DisplayListItem> mRidesList;
 
@@ -30,6 +32,9 @@ public class RecyclerViewActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mListTitle = (TextView) findViewById(R.id.list_title);
+        mListTitle.setText("My Rides");
 
         Client.getInstance().updateList(this);
 
@@ -82,6 +87,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.clientRides) {
+            mListTitle.setText("My Rides");
             Client.getInstance().updateList(this);
 
             final Handler handler = new Handler();
@@ -97,6 +103,21 @@ public class RecyclerViewActivity extends AppCompatActivity {
         }else if (item.getItemId() == R.id.newRideRequest) {
             Intent intent = new Intent(RecyclerViewActivity.this, RideRequestFormActivity.class);
             startActivity(intent);
+        }else if (item.getItemId() == R.id.clientHistory) {
+            //This will not work until history functionality is implemented on the server
+            mListTitle.setText("History");
+            History.getInstance().updateList(this);
+
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mRidesList = History.getInstance().getDriverHistory();
+                    mAdapter = new MyAdapter(mRidesList);
+                    mRecyclerView.setAdapter(mAdapter);
+                    RecyclerSectionItemDecorationHelper();
+                }
+            }, 1500);
         }
         return true;
     }
